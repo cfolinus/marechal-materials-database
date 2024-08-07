@@ -1,0 +1,13 @@
+# environment.yml
+# run via: conda env create --file environment.yml
+
+name: marechal-materials-database
+channels:
+     - conda-forge
+dependencies:
+     - python ==3.7.6
+     - anaconda
+     - pip
+     - pip:
+          - -r requirements.txt
+     

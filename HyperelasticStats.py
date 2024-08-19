@@ -31,6 +31,11 @@ class HyperelasticStats:
         '''returns rmse'''
         squared_errors = (self.target - self.model) ** 2
         return np.sqrt(np.mean(squared_errors))
+   
+    def nrmse(self):
+         '''returns normalized RMSE'''
+         data_range = np.max(self.target) - np.min(self.target)
+         return self.rmse() / data_range
 
     def r_squared(self):
         '''returns calculated value of r^2'''
@@ -39,7 +44,7 @@ class HyperelasticStats:
     def adj_r_squared(self):
         '''returns calculated value of adjusted r^2
         R¯² = 1 - (n-1)(R²-1)/(n-p-1)'''
-        adj_squared_errors =   1 - ((self._n - 1)*(self.r_squared() - 1)/(self._n - self.p - 1))     
+        adj_squared_errors =   1 - ((self._n - 1)*(1 - self.r_squared())/(self._n - self.p - 1))     
         return adj_squared_errors
     
     def aic(self):
